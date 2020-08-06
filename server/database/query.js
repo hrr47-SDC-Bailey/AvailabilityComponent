@@ -25,4 +25,19 @@ var getHostels = function() {
   });
 };
 
-module.exports.getHostels = getHostels;
+var getRoomsByHostel = function(hostelId) {
+  return new Promise((resolve, reject) => {
+    connection.query('SELECT * FROM rooms where hostel_id = ?', [hostelId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+
+module.exports = {
+  getHostels: getHostels,
+  getRoomsByHostel: getRoomsByHostel
+};
