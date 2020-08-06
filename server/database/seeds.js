@@ -1,16 +1,4 @@
-const credentials = require('./config.js');
-const mysql = require('mysql');
-const fs = require('fs');
 
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: credentials.username,
-  password: credentials.password,
-  database: credentials.database,
-  multipleStatements: true
-});
-
-connection.connect();
 
 
 var makeSchema = fs.readFileSync('server/database/schema.sql').toString();
