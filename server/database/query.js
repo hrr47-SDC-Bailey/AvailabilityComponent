@@ -1,19 +1,17 @@
-const credentials = require('./config.js');
 const mysql = require('mysql');
-const fs = require('fs');
+const credentials = require('./config.js');
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: credentials.username,
   password: credentials.password,
   database: credentials.database,
-  multipleStatements: true
+  multipleStatements: true,
 });
 
 connection.connect();
 
-
-var getHostels = function() {
+const getHostels = function getHostels() {
   return new Promise((resolve, reject) => {
     connection.query('SELECT * FROM hostels', (error, results) => {
       if (error) {
@@ -25,7 +23,7 @@ var getHostels = function() {
   });
 };
 
-var getRoomsByHostel = function(hostelId) {
+const getRoomsByHostel = function getRoomsByHostel(hostelId) {
   return new Promise((resolve, reject) => {
     connection.query('SELECT * FROM rooms where hostel_id = ?', [hostelId], (error, results) => {
       if (error) {
@@ -38,6 +36,7 @@ var getRoomsByHostel = function(hostelId) {
 };
 
 module.exports = {
-  getHostels: getHostels,
-  getRoomsByHostel: getRoomsByHostel
+  getHostels,
+  getRoomsByHostel,
+  connection,
 };
