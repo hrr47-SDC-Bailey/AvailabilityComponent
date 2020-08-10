@@ -5,6 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 app.get('/api/hostel', (req, res) => {
   query.getHostels()
