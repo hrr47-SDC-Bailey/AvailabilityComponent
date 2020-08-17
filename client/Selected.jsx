@@ -44,6 +44,7 @@ const Selected = (props) => (
         </ul>
         <div className={styles.paymentMethods}>
           <div className={styles.visa}></div>
+          <div className={styles.mastercard}></div>
         </div>
       </div>
 

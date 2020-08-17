@@ -35,6 +35,13 @@ const Rooms = (props) => (
                   <FiChevronDown />
                 </div>
               </div>
+              {/* <div className={styles.chooseMenu}>
+                <ul>
+                  <li>1 Room</li>
+                  <li>2 Rooms</li>
+                  <li>3 Rooms</li>
+                </ul>
+              </div> */}
             </div>
           </div>
         </div>
