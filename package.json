@@ -17,9 +17,13 @@
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "express": "^4.17.1",
+    "grommet-icons": "^4.4.0",
+    "grommet-styles": "^0.2.0",
     "mysql": "^2.18.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
+    "styled-components": "^5.1.1",
     "webpack": "^4.44.1"
   },
   "devDependencies": {

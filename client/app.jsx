@@ -1,11 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from './css/styles.css';
+import axios from 'axios';
+import styles from './css/main.css';
+import Availability from './Availability.jsx';
+import Selected from './Selected.jsx';
 
-const App = () => (
-  <div className={styles.background}>
-    <h1>React is rendering and styling</h1>
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rooms: [],
+    };
+  }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+  componentDidMount() {
+    axios.get('/api/hostel/1/rooms')
+      .then((result) => {
+        this.setState({
+          rooms: result.data,
+        });
+      });
+  }
+
+  render() {
+    return (
+      <div className={styles.center}>
+        <div className={styles.container}>
+          <Availability rooms={this.state.rooms} />
+          <Selected />
+        </div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('Availability'));

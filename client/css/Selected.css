@@ -1,0 +1,91 @@
+.SelectionContainer {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  margin-left: 15px;
+}
+
+.MySelection {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 71px 187.5px;
+  grid-template-columns: 355px;
+  position: sticky;
+  top: 0;
+}
+
+.Selection {
+  padding: 16px;
+  grid-row: 1 / 2;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.SearchDates {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  padding: 10px;
+  font-size: 14px;
+  border: 1.25px solid #dddfe4;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.RoomInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.RoomInfo:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.RoomInfo:first-child * {
+  margin-right: 3px;
+}
+
+.chooseRoom {
+  grid-row: 3 / 5;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: white;
+  color: #31363f;
+  border-bottom: 1.25px solid #dddfe4;
+  border-right: 1.25px solid #dddfe4;
+  border-left: 1.25px solid #dddfe4;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.chooseRoom span {
+  font-size: 16px;
+}
+
+.chooseRoom ul {
+  padding-left: 0;
+}
+
+.chooseRoom li {
+  overflow-y: hidden;
+  font-size: 12px;
+}
+
+.changeSearch {
+  color: #f25621;
+  cursor: pointer;
+  padding-top: 8px;
+}
+
+.paymentMethods {
+  display: flex;
+}
+
+.visa {
+
+}
