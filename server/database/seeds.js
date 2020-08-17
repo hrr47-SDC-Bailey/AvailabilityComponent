@@ -1,5 +1,14 @@
+const fs = require('fs');
 const makeSchema = fs.readFileSync('server/database/schema.sql').toString();
-const connection = require('./query.js');
+const mysql = require('mysql');
+const credentials = require('./config.js');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: credentials.username,
+  password: credentials.password,
+  database: credentials.database,
+  multipleStatements: true,
+});
 
 connection.query(makeSchema, (error) => {
   if (error) { throw error; }
@@ -21,37 +30,41 @@ connection.query(makeSchema, (error) => {
 });
 
 // Seed rooms table
+
 const descriptions = 'Bacon ipsum dolor amet drumstick turkey pastrami chicken, brisket filet mignon short loin. Jowl hamburger pork chop fatback, meatball landjaeger filet mignon chuck t-bone. Pork buffalo tri-tip, jowl bresaola sirloin kielbasa filet mignon alcatra leberkas burgdoggen pork belly picanha. Tongue picanha sirloin beef ribs filet mignon jerky turducken. Ground round bresaola picanha, burgdoggen pork loin turducken meatloaf. Rump beef chicken, fatback boudin buffalo drumstick landjaeger turkey venison meatloaf strip steak ham hock kevin leberkas. Jerky chicken chislic, meatloaf drumstick shank doner rump kielbasa pig filet mignon boudin ham hock turducken.'.split('.');
 
 const privateRooms = ['Standard Twin Private Ensuite', 'Basic Double Bed Private Ensuite', 'Deluxe Double Bed Private Ensuite', 'Standard 3 Bed Family Room Ensuite'];
 
 const dormRooms = ['Standard 6 Bed Female Dorm', 'Superior 2 Bed Female Dorm', 'Standard 8 Bed Male Dorm'];
 
-for (let i = 1; i <= 100; i += 1) {
-  // Give Each Hostel one of each room
-  for (let p = 0; p < privateRooms.length; p += 1) {
-    const name = privateRooms[p];
-    const description = descriptions[Math.floor(Math.random() * Math.floor(descriptions.length))];
-    const room = {
-      name,
-      description,
-      type: 'private',
-      quantity: 2,
-      hostel_id: i,
-    };
-    connection.query(`INSERT INTO rooms (name, description, type, hostel_id, quantity) VALUES ('${room.name}', '${room.description}', '${room.type}', '${room.hostel_id}', '${room.quantity}')`);
-  }
+setTimeout(() => {
+  for (let i = 1; i <= 100; i += 1) {
+    // Give Each Hostel one of each room
+    for (let p = 0; p < privateRooms.length; p += 1) {
+      const name = privateRooms[p];
+      const description = descriptions[Math.floor(Math.random() * Math.floor(descriptions.length))];
+      const room = {
+        name,
+        description,
+        type: 'private',
+        quantity: 2,
+        hostel_id: i,
+      };
+      connection.query(`INSERT INTO rooms (name, description, type, hostel_id, quantity) VALUES ('${room.name}', '${room.description}', '${room.type}', '${room.hostel_id}', '${room.quantity}')`);
+    }
 
-  for (let d = 0; d < dormRooms.length; d += 1) {
-    const name = dormRooms[d];
-    const description = descriptions[Math.floor(Math.random() * Math.floor(descriptions.length))];
-    const room = {
-      name,
-      description,
-      type: 'dorm',
-      quantity: 2,
-      hostel_id: i,
-    };
-    connection.query(`INSERT INTO rooms (name, description, type, hostel_id, quantity) VALUES ('${room.name}', '${room.description}', '${room.type}', '${room.hostel_id}', '${room.quantity}')`);
+    for (let d = 0; d < dormRooms.length; d += 1) {
+      const name = dormRooms[d];
+      const description = descriptions[Math.floor(Math.random() * Math.floor(descriptions.length))];
+      const room = {
+        name,
+        description,
+        type: 'dorm',
+        quantity: 2,
+        hostel_id: i,
+      };
+      connection.query(`INSERT INTO rooms (name, description, type, hostel_id, quantity) VALUES ('${room.name}', '${room.description}', '${room.type}', '${room.hostel_id}', '${room.quantity}')`);
+    }
   }
-}
+  connection.end();
+}, 2000);

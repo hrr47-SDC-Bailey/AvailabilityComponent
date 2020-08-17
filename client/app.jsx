@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styles from './css/main.css';
-import CheckAvailability from './checkAvailability.jsx';
-import MySelection from './MySelection.jsx';
+import Availability from './Availability.jsx';
+import Selected from './Selected.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,12 +24,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        <CheckAvailability rooms={this.state.rooms} />
-        <MySelection />
+      <div className={styles.center}>
+        <div className={styles.container}>
+          <Availability rooms={this.state.rooms} />
+          <Selected />
+        </div>
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('Availability'));

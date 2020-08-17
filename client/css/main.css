@@ -1,9 +1,24 @@
 .container {
   display: grid;
-  grid-template-columns: 50% 50%;
-  column-gap: 10px;
-
-  height: 500px;
-  width: 100%;
-  font-size: 45px;
+  height: auto;
+  width: 75%;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr;
+  box-sizing: border-box;
+  font-family: 'Noto Sans';
 }
+
+.SelectionContainer {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  background-color: red;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(241, 242, 244);
+}
+
+
