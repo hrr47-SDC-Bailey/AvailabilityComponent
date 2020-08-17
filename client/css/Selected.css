@@ -74,6 +74,7 @@
 .chooseRoom li {
   overflow-y: hidden;
   font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .changeSearch {
@@ -87,5 +88,17 @@
 }
 
 .visa {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-image: url('https://u.hwstatic.com/hw/pwa/payments-sprite.svg');
+}
 
+.mastercard {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('https://u.hwstatic.com/hw/pwa/payments-sprite.svg');
+  background-repeat: no-repeat;
+  background-position: -120px 0;
+  margin-left: 5px;
 }

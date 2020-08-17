@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/hostel/1/rooms')
+    axios.get('http://localhost:3009/api/hostel/1/rooms')
       .then((result) => {
         this.setState({
           rooms: result.data,
