@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "grommet-icons": "^4.4.0",
     "grommet-styles": "^0.2.0",
+    "moment": "^2.27.0",
     "mysql": "^2.18.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

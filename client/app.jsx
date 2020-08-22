@@ -10,11 +10,33 @@ class App extends React.Component {
     super(props);
     this.state = {
       rooms: [],
+      hostelId: 1,
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3009/api/hostel/1/rooms')
+    this.setHostelId();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.hostelId !== this.state.hostelId) {
+      this.getAvailability();
+    }
+  }
+
+  setHostelId() {
+    const re = /\d+/;
+    const idPath = window.location.pathname;
+    const urlId = idPath.match(re);
+    const hostelString = urlId[0];
+    const newHostelId = Number.parseInt(hostelString, 10);
+    this.setState({
+      hostelId: newHostelId,
+    });
+  }
+
+  getAvailability() {
+    axios.get('/api/hostel/1/rooms')
       .then((result) => {
         this.setState({
           rooms: result.data,
