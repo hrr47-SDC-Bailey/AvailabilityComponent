@@ -7,7 +7,7 @@
 .MySelection {
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: auto 71px 187.5px;
+  grid-template-rows: auto minmax(71px,auto) 187.5px;
   grid-template-columns: 355px;
   position: sticky;
   top: 0;
@@ -25,6 +25,7 @@
 }
 
 .SearchDates {
+  height: auto;
   grid-row: 2 / 3;
   grid-column: 1 / 2;
   padding: 10px;
@@ -101,4 +102,76 @@
   background-repeat: no-repeat;
   background-position: -120px 0;
   margin-left: 5px;
+}
+
+.dateSelect {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.searchGrid {
+  color: #31363f;
+  /* height: 100px; */
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1.5rem;
+  grid-template-rows: auto auto auto auto;
+}
+
+.locationInput {
+  grid-row: 1 / 2;
+  font-size: 0.75rem;
+  color: #31363f;
+  letter-spacing: 0.2px;
+}
+
+.fieldInner {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  border-radius: 4px;
+  height: 100%;
+  align-items: center;
+  position: relative;
+  color: #31363f;
+  background-color: white;
+}
+
+.fieldInnerIcon {
+  grid-column: 1 / 2;
+  color: #f25621;
+  padding-left: 3px;
+}
+
+.fieldInnerInput {
+  grid-column: 2 / 3;
+}
+
+input {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.checkDates {
+  grid-row: 2 / 3;
+  display: flex;
+  justify-content: space-between;
+}
+
+.subSearch {
+  grid-row: 3 / 4;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.close {
+  color: #f25621;
+  cursor: pointer;
 }

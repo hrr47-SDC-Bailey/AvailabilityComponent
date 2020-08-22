@@ -6,6 +6,7 @@
   grid-template-rows: repeat(2, auto) 1fr;
   box-sizing: border-box;
 }
+
 .checkAvailability {
   padding: 16px;
   grid-row: 1 / 2;

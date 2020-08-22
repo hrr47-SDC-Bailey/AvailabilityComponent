@@ -25,7 +25,7 @@ const Availability = (props) => {
         </div>
       </div>
       <div className={styles.roomContainer}>
-        {privateRooms.map((room) => <Rooms key={room.id} />)}
+        {privateRooms.map((room) => <Rooms room={room} key={room.id} />)}
       </div>
     </div>
   );
