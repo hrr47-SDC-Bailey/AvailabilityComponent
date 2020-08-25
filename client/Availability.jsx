@@ -4,7 +4,6 @@ import Rooms from './Rooms.jsx';
 
 const Availability = (props) => {
   const privateRooms = props.rooms.filter((room) => room.type === 'private');
-
   const dormRooms = props.rooms.filter((room) => room.type === 'dorm');
 
   return (
@@ -25,7 +24,7 @@ const Availability = (props) => {
         </div>
       </div>
       <div className={styles.roomContainer}>
-        {privateRooms.map((room) => <Rooms room={room} key={room.id} />)}
+        {privateRooms.map((room, i, arr) => <Rooms min={arr[0].id} room={room} handleChoose={props.handleChoose} key={room.id} />)}
       </div>
     </div>
   );

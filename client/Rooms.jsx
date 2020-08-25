@@ -7,9 +7,10 @@ import styles from './css/rooms.css';
 class Rooms extends React.Component {
   constructor(props) {
     super(props);
+    this.count = 0;
     this.state = {
       freeChoose: 'none',
-      paidChoose: 'none'
+      paidChoose: 'none',
     };
   }
 
@@ -23,23 +24,36 @@ class Rooms extends React.Component {
 
   togglePaid() {
     if (this.state.paidChoose === 'none') {
-      this.setState({ paidChoose: 'block', freeChoose: 'none'});
+      this.setState({ paidChoose: 'block', freeChoose: 'none' });
     } else {
       this.setState({ paidChoose: 'none' });
     }
   }
 
+  showPaid() {
+    if (this.props.room.id === this.props.min) {
+      return <span className={styles.persuasiveMessagesLeft}>Best Private Price</span>;
+    }
+  }
+
   render() {
-    console.log(this.props);
     return (
       <div className={styles.room}>
         <div className={styles.description}>
           <div><strong>{this.props.room.name}</strong></div>
-          <div>{this.props.room.description}.</div>
+          <div>
+            {this.props.room.description}
+            .
+          </div>
           <div>Sleeps 2 - Ensuite</div>
           <div className={styles.persuasiveMessages}>
-            <span>Best Private Price</span>
-            <span>Only {this.props.room.quantity} Rooms Left!</span>
+            {this.showPaid()}
+            <span className={styles.persuasiveMessagesRight}>
+              Only {' '}
+              {this.props.room.quantity}
+              {' '}
+              Rooms Left!
+            </span>
           </div>
 
         </div>
@@ -67,9 +81,8 @@ class Rooms extends React.Component {
                     style={{ display: this.state.freeChoose }}
                   >
                     <ul className={styles.list}>
-                      <li className={styles.item}>1 Room</li>
-                      <li className={styles.item}>2 Rooms</li>
-                      <li className={styles.item}>3 Rooms</li>
+                      <li onClick={(e) => { this.props.room.price = 67.34; this.props.handleChoose(e, this.props.room); this.toggleFree(); }} className={styles.item}>1 Room</li>
+                      <li onClick={(e) => { this.props.room.price = 67.34; this.props.handleChoose(e, this.props.room); this.toggleFree(); }} className={styles.item}>2 Rooms</li>
                     </ul>
                   </div>
                 </div>
@@ -98,9 +111,8 @@ class Rooms extends React.Component {
                     style={{ display: this.state.paidChoose }}
                   >
                     <ul className={styles.list}>
-                      <li className={styles.item}>1 Room</li>
-                      <li className={styles.item}>2 Rooms</li>
-                      <li className={styles.item}>3 Rooms</li>
+                      <li onClick={(e) => { this.props.room.price = 63.70; this.props.handleChoose(e, this.props.room); this.togglePaid(); }} className={styles.item}>1 Room</li>
+                      <li onClick={(e) => { this.props.room.price = 63.70; this.props.handleChoose(e, this.props.room); this.togglePaid(); }} className={styles.item}>2 Rooms</li>
                     </ul>
                   </div>
                 </div>
@@ -114,3 +126,4 @@ class Rooms extends React.Component {
 }
 
 export default Rooms;
+

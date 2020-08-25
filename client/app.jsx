@@ -10,7 +10,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       rooms: [],
-      hostelId: 1,
+      hostelId: -1,
+      selectedRooms: [],
     };
   }
 
@@ -25,18 +26,15 @@ class App extends React.Component {
   }
 
   setHostelId() {
-    const re = /\d+/;
     const idPath = window.location.pathname;
-    const urlId = idPath.match(re);
-    const hostelString = urlId[0];
-    const newHostelId = Number.parseInt(hostelString, 10);
-    this.setState({
-      hostelId: newHostelId,
-    });
+    const urlID = idPath.match(/\d+/);
+    let newID = urlID[0];
+    newID = Number.parseInt(newID, 10);
+    this.setState({ hostelId: newID });
   }
 
   getAvailability() {
-    axios.get('/api/hostel/1/rooms')
+    axios.get(`/api/hostel/${this.state.hostelId}/rooms`)
       .then((result) => {
         this.setState({
           rooms: result.data,
@@ -44,12 +42,20 @@ class App extends React.Component {
       });
   }
 
+  handleChoose(e, room) {
+    const quantity = e.currentTarget.textContent[0];
+    room.quantity = Number(quantity);
+    this.setState((prevState) => ({
+      selectedRooms: prevState.selectedRooms.concat(room),
+    }));
+  }
+
   render() {
     return (
       <div className={styles.center}>
         <div className={styles.container}>
-          <Availability rooms={this.state.rooms} />
-          <Selected />
+          <Availability handleChoose={this.handleChoose.bind(this)} selectedRooms={this.state.selectedRooms} rooms={this.state.rooms} />
+          <Selected selectedRooms={this.state.selectedRooms} />
         </div>
       </div>
     );

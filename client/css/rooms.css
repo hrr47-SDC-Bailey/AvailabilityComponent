@@ -30,7 +30,7 @@
   justify-content: flex-start;
 }
 
-.persuasiveMessages span {
+.persuasiveMessagesLeft {
   padding: 4px 8px;
   border: 1.25px solid rgb(48, 207, 114);
   color: rgb(38, 161, 89);
@@ -39,10 +39,13 @@
   margin-right: 8px;
 }
 
-.persuasiveMessages span:nth-of-type(2) {
+.persuasiveMessagesRight {
+  padding: 4px 8px;
   border: 1.25px solid rgb(145, 177, 243);
   color: rgb(39, 103, 231);
   background-color: rgb(241, 245, 253);
+  border-radius: 4px;
+  margin-right: 8px;
 }
 
 .rateCard {
