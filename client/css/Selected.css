@@ -175,3 +175,9 @@ input:focus {
   color: #f25621;
   cursor: pointer;
 }
+
+.selectedroom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

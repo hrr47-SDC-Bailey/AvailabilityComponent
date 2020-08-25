@@ -11,6 +11,7 @@ class Selected extends React.Component {
     this.state = {
       isChanged: false,
       view: this.startView,
+      total: 0
     };
     this.startView = (
       <div>
@@ -34,50 +35,76 @@ class Selected extends React.Component {
       </div>
     );
 
-    this.clickView = (<div>
+    this.clickView = (
+      <div>
         <div className={styles.dateSelect}>
           <span>
             <i><FaRegCalendarAlt /></i>
-          <span>Change Dates</span>
+            <span>Change Dates</span>
           </span>
           <span onClick={this.toggle.bind(this)} className={styles.close}>
             Close
           </span>
         </div>
-      <div className={styles.searchGrid}>
-        <div className={styles.locationInput}>
-          <div className={styles.locationInput}>LOCATION</div>
-          <div className={styles.fieldInner}>
-            <span className={styles.fieldInnerIcon}>
-              <i><FaSearch /></i>
+        <div className={styles.searchGrid}>
+          <div className={styles.locationInput}>
+            <div className={styles.locationInput}>LOCATION</div>
+            <div className={styles.fieldInner}>
+              <span className={styles.fieldInnerIcon}>
+                <i><FaSearch /></i>
               </span>
-            <span className={styles.fieldInnerInput}>
-              <input></input>
+              <span className={styles.fieldInnerInput}>
+                <input />
               </span>
+            </div>
           </div>
-        </div>
-        <div className={styles.checkDates}>
-          <div>
-            <div>Check In</div>
-            <div><input></input></div>
+          <div className={styles.checkDates}>
+            <div>
+              <div>Check In</div>
+              <div><input /></div>
+            </div>
+            <div>
+              <div>Check Out</div>
+              <div><input /></div>
+            </div>
           </div>
-          <div>
-            <div>Check Out</div>
-            <div><input></input></div>
-          </div>
-        </div>
-        <div className={styles.subSearch}>
-          <div>
-            <div>Guests</div>
-            <div><input></input></div>
-          </div>
-          <div>
-            <div>Search</div>
-            <div><input></input></div>
+          <div className={styles.subSearch}>
+            <div>
+              <div>Guests</div>
+              <div><input /></div>
+            </div>
+            <div>
+              <div>Search</div>
+              <div><input /></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>);
+    );
+
+    this.default = (
+      <div>
+        <span>Choose Your Room</span>
+        <ul>
+          <li>
+            <i><FaCheck size={10} /></i>
+            Instant Confirmation
+          </li>
+          <li>
+            <i><FaCheck size={10} /></i>
+            No Booking Fees
+          </li>
+          <li>
+            <i><FaCheck size={10} /></i>
+            Booking only takes two minutes
+          </li>
+        </ul>
+        <div className={styles.paymentMethods}>
+          <div className={styles.visa} />
+          <div className={styles.mastercard} />
+        </div>
+      </div>
+    );
   }
 
   toggle() {
@@ -91,7 +118,30 @@ class Selected extends React.Component {
     return this.clickView;
   }
 
+  showRooms() {
+    if (this.props.selectedRooms.length > 0) {
+      let total = 0;
+      return (
+        <div>
+          {this.props.selectedRooms.map((room, i) => {
+            total += room.price;
+            return (
+            <div className={styles.selectedroom} key={i}>
+              <span>{room.name}</span>
+              <span>{room.quantity}</span>
+                <span>€{room.price}</span>
+            </div>)
+          })}
+          <div><strong>Total:</strong> €{total}</div>
+        </div>
+      );
+    }
+    return this.default;
+  }
+
   render() {
+    console.log(this.props.selectedRooms);
+
     return (
       <div className={styles.SelectionContainer}>
         <div className={styles.MySelection}>
@@ -99,26 +149,9 @@ class Selected extends React.Component {
           <div className={styles.SearchDates}>
             {this.displaySelection()}
           </div>
+
           <div className={styles.chooseRoom}>
-            <span>Choose Your Room</span>
-            <ul>
-              <li>
-                <i><FaCheck size={10} /></i>
-                Instant Confirmation
-              </li>
-              <li>
-                <i><FaCheck size={10} /></i>
-                No Booking Fees
-              </li>
-              <li>
-                <i><FaCheck size={10} /></i>
-                Booking only takes two minutes
-              </li>
-            </ul>
-            <div className={styles.paymentMethods}>
-              <div className={styles.visa} />
-              <div className={styles.mastercard} />
-            </div>
+            {this.showRooms()}
           </div>
 
         </div>
