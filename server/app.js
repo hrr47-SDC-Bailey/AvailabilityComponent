@@ -80,6 +80,26 @@ app.post('/api/hostel/:hostelId/rooms', (req, res) => {
   });
 });
 
+app.delete('/api/hostel', (req, res) => {
+  console.log(req.body.id);
+  query.deleteHostel(req.body, (error, deletedHostel) => {
+    if (error) {
+      res.status(502).send(error);
+      return;
+    }
+    res.send(deletedHostel);
+  });
+});
+
+app.delete('/api/hostel/:hostelId/rooms', (req, res) => {
+  query.deleteRoom(req.body, (error, deletedRoom) => {
+    if (error) {
+      res.status(502).send(error);
+      return;
+    }
+    res.send(deletedRoom);
+  });
+});
 
 
 app.listen(3009);

@@ -15,7 +15,7 @@ const getHostels = function getHostels() {
   return new Promise((resolve, reject) => {
     connection.query('SELECT * FROM hostels', (error, results) => {
       if (error) {
-        reject(error);
+        reject('error');
       } else {
         resolve(results);
       }
@@ -27,7 +27,7 @@ const getRoomsByHostel = function getRoomsByHostel(hostelId) {
   return new Promise((resolve, reject) => {
     connection.query('SELECT * FROM rooms where hostel_id = ?', [hostelId], (error, results) => {
       if (error) {
-        reject(error);
+        reject('error');
       } else {
         resolve(results);
       }
@@ -38,7 +38,7 @@ const getRoomsByHostel = function getRoomsByHostel(hostelId) {
 const updateHostel = (hostelToUpdate, callback) => {
   connection.query('UPDATE `hostels`  SET `name` = ?, `currency` = ? where `id` = ?', [hostelToUpdate.name, hostelToUpdate.currency, hostelToUpdate.id], (error, results) => {
     if (error) {
-      callback(error, null);
+      callback('error', null);
     } else {
       callback(null, results);
     }
@@ -48,7 +48,7 @@ const updateHostel = (hostelToUpdate, callback) => {
 const updateRoom = (roomToUpdate, callback) => {
   connection.query('UPDATE `rooms` SET `name` = ?, `description` = ?, `type` = ?, `quantity` = ? where `id` = ?', [roomToUpdate.name, roomToUpdate.description, roomToUpdate.type, roomToUpdate.quantity, roomToUpdate.id], (error, results) => {
     if (error) {
-      callback(error, null);
+      callback('error', null);
     } else {
       callback(null, results);
     }
@@ -60,7 +60,7 @@ const createHostel = (hostel, callback) => {
   const currency = hostel.currency;
   connection.query('INSERT INTO `hostels` (name, currency) VALUES (?, ?)', [name, currency], (error, results) => {
     if (error) {
-      callback(error, null);
+      callback('error', null);
     } else {
       callback(null, results);
     }
@@ -75,12 +75,34 @@ const createRoom = (room, callback) => {
   const quantity = room.quantity;
   connection.query('INSERT INTO `rooms` (name, description, type, hostelid, quantity) VALUES (?, ?, ?, ?, ?)', [name, description, type, hostelid, quantity], (error, results) => {
     if (error) {
+      callback('error', null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+const deleteHostel = (hostelToDelete, callback) => {
+  connection.query('DELETE FROM `rooms` WHERE `hostel_id` = ?', [hostelToDelete.id]);
+  connection.query('DELETE FROM `hostels` WHERE `id` = ?', [hostelToDelete.id], (error, results) => {
+    if (error) {
       callback(error, null);
     } else {
       callback(null, results);
     }
   });
 };
+
+const deleteRoom = (roomToDelete, callback) => {
+  connection.query('DELETE FROM `rooms` WHERE `hostel_id` = ?', [roomToDelete.id], (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 
 module.exports = {
   getHostels,
@@ -89,5 +111,7 @@ module.exports = {
   updateRoom,
   createHostel,
   createRoom,
+  deleteHostel,
+  deleteRoom,
   connection,
 };
