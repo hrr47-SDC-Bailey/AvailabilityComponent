@@ -35,8 +35,30 @@ const getRoomsByHostel = function getRoomsByHostel(hostelId) {
   });
 };
 
+const updateHostel = (hostelToUpdate, callback) => {
+  connection.query('UPDATE `hostels`  SET `name` = ?, `currency` = ? where `id` = ?', [hostelToUpdate.name, hostelToUpdate.currency, hostelToUpdate.id], (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+const updateRoom = (roomToUpdate, callback) => {
+  connection.query('UPDATE `rooms` SET `name` = ?, `description` = ?, `type` = ?, `quantity` = ? where `id` = ?', [roomToUpdate.name, roomToUpdate.description, roomToUpdate.type, roomToUpdate.quantity, roomToUpdate.id], (error, results) => {
+    if (error) {
+      callback(eroor, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 module.exports = {
   getHostels,
   getRoomsByHostel,
+  updateHostel,
+  updateRoom,
   connection,
 };

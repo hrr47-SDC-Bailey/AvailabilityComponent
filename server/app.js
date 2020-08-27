@@ -40,4 +40,26 @@ app.get('/api/hostel/room/reservation', (req, res) => {
   res.send('endpoint under maintenance');
 });
 
+app.put('/api/hostel', (req, res) => {
+  query.updateHostel(req.body, (error, updatedHostel) => {
+    if (error) {
+      res.status(502).send();
+      return;
+    }
+    res.send(updatedHostel);
+  });
+});
+
+app.put('/api/hostel/:hostelId/rooms', (req, res) => {
+  query.updateRoom(req.body, (error, updatedRoom) => {
+    if (error) {
+      res.status(502).send();
+      return;
+    }
+    res.send(updatedRoom);
+  });
+});
+
+
+
 app.listen(3009);
