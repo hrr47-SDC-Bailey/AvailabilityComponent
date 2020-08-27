@@ -48,7 +48,34 @@ const updateHostel = (hostelToUpdate, callback) => {
 const updateRoom = (roomToUpdate, callback) => {
   connection.query('UPDATE `rooms` SET `name` = ?, `description` = ?, `type` = ?, `quantity` = ? where `id` = ?', [roomToUpdate.name, roomToUpdate.description, roomToUpdate.type, roomToUpdate.quantity, roomToUpdate.id], (error, results) => {
     if (error) {
-      callback(eroor, null);
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+const createHostel = (hostel, callback) => {
+  const name = hostel.name;
+  const currency = hostel.currency;
+  connection.query('INSERT INTO `hostels` (name, currency) VALUES (?, ?)', [name, currency], (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+const createRoom = (room, callback) => {
+  const name = room.name;
+  const description = room.description;
+  const type = room.type;
+  const hostelid = room.hostel_id;
+  const quantity = room.quantity;
+  connection.query('INSERT INTO `rooms` (name, description, type, hostelid, quantity) VALUES (?, ?, ?, ?, ?)', [name, description, type, hostelid, quantity], (error, results) => {
+    if (error) {
+      callback(error, null);
     } else {
       callback(null, results);
     }
@@ -60,5 +87,7 @@ module.exports = {
   getRoomsByHostel,
   updateHostel,
   updateRoom,
+  createHostel,
+  createRoom,
   connection,
 };

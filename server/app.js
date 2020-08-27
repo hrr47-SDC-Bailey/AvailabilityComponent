@@ -60,6 +60,26 @@ app.put('/api/hostel/:hostelId/rooms', (req, res) => {
   });
 });
 
+app.post('/api/hostel', (req, res) => {
+  query.createHostel(req.body, (error, newHostel) => {
+    if (error) {
+      res.status(502).send();
+      return;
+    }
+    res.send(newHostel);
+  });
+});
+
+app.post('/api/hostel/:hostelId/rooms', (req, res) => {
+  query.createRoom(req.body, (error, newRoom) => {
+    if (error) {
+      res.status(502).send();
+      return;
+    }
+    res.send(newRoom);
+  });
+});
+
 
 
 app.listen(3009);
