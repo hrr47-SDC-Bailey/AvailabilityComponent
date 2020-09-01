@@ -11,26 +11,21 @@ app.use(express.static('public'));
 app.use('/hostels/:hostelId', express.static('public'));
 
 
+
 app.get('/api/hostel/:hostelId', (req, res) => {
   const id = req.params.hostelId;
-  query.getHostelById(id, (error, data) => {
-    if (error) {
-      res.status(400).send('something went wrong');
-    } else {
-      res.json(data);
-    }
-  });
+  if(!Number.isNaN(Number(id))) {
+    query.getHostelById(id)
+      .then((result) => {
+        res.json(result);
+      })
+        .catch(() => {
+          res.status(400).send('something went wrong');
+        });
+  } else {
+    res.send('Provide a numeric hostelId');
+  }
 });
-
-// app.get('/api/hostel', (req, res) => {
-//   query.getHostels()
-//     .then((result) => {
-//       res.json(result);
-//     })
-//     .catch(() => {
-//       res.status(400).send('something went wrong');
-//     });
-// });
 
 // app.get('/api/hostel/:hostelId/rooms', (req, res) => {
 //   const id = req.params.hostelId;
@@ -45,6 +40,16 @@ app.get('/api/hostel/:hostelId', (req, res) => {
 //   } else {
 //     res.send('Provide a numeric hostelId');
 //   }
+// });
+
+// app.get('/api/hostel', (req, res) => {
+//   query.getHostels()
+//     .then((result) => {
+//       res.json(result);
+//     })
+//     .catch(() => {
+//       res.status(400).send('something went wrong');
+//     });
 // });
 
 // app.get('/api/hostel/room/reservation', (req, res) => {
