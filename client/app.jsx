@@ -38,9 +38,9 @@ class App extends React.Component {
   getAvailability() {
     axios.get(`/api/hostel/${this.state.hostelId}`)
       .then((result) => {
-        console.log(result);
+        console.log('THIS DATA: ', result.data.rows);
         this.setState({
-          rooms: result.data,
+          rooms: result.data.rows,
         });
       });
   }

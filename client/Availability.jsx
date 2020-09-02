@@ -5,7 +5,6 @@ import Rooms from './Rooms.jsx';
 const Availability = (props) => {
   const privateRooms = props.rooms.filter((room) => room.type === 'private');
   const dormRooms = props.rooms.filter((room) => room.type === 'dorm');
-
   return (
     <div className={styles.AvailabilityContainer}>
       <h4 className={styles.checkAvailability}>Check Availability</h4>

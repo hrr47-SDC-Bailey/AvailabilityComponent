@@ -22,33 +22,39 @@ db.connect((err) => {
 
 const getHostelById = (id, callback) => {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM hostels WHERE id = ${id}`, (error, results) => {
+    db.query(`SELECT * FROM rooms WHERE id = ${id}`, (error, results) => {
       if (error) {
         reject('error')
       } else {
-        let current = Object.values(results.rows[0]);
-        let data = [];
-        let obj = {};
-        // obj.id = current[0];
-        // obj.hostel = current[1];
-        // obj.currency = current[2];
-        // data.push(obj);
-        // obj = {};
-        for (var i = 3; i < current.length; i += 4) {
-          obj.name = current[i];
-          obj.description = current[i + 1];
-          obj.type = current[i + 2];
-          obj.quantity = current[i + 3];
-          data.push(obj);
-          obj = {};
-        }
-        resolve(data);
+        resolve(results);
       }
     });
   })
 }
 
 /////////////////////////// CASANDRA QUERIES ///////////////////////////////////
+///////NOT FUNCTIONING YET///////////
+// const cassandra = require ('cassandra-driver');
+// const client = new cassandra.Client({contactPoints: ['Test Cluster', keyspace:'hostels']});
+// client.connect((err) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('CONNECTED CASSANDRA');
+//   }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////
 
