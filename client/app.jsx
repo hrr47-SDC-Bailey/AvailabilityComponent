@@ -17,6 +17,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.setHostelId();
+    console.log(this.state.hostelId);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,11 +34,13 @@ class App extends React.Component {
     this.setState({ hostelId: newID });
   }
 
+// `/api/hostel/${this.state.hostelId}/rooms`
   getAvailability() {
-    axios.get(`/api/hostel/${this.state.hostelId}/rooms`)
+    axios.get(`/api/hostel/${this.state.hostelId}`)
       .then((result) => {
+        console.log('THIS DATA: ', result.data.rows);
         this.setState({
-          rooms: result.data,
+          rooms: result.data.rows,
         });
       });
   }
