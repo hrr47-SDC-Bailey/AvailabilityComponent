@@ -20,9 +20,9 @@ db.connect((err) => {
 });
 
 
-const getHostelById = (id, callback) => {
+const getRoomById = function getRoomByID(id) {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM rooms WHERE id = ${id}`, (error, results) => {
+    db.query(`SELECT * FROM rooms WHERE hostel_id = ${id}`, (error, results) => {
       if (error) {
         reject('error')
       } else {
@@ -31,6 +31,21 @@ const getHostelById = (id, callback) => {
     });
   })
 }
+
+
+
+const updateRoomById = (updatedRoom, callback) => {
+  const queryStr =`UPDATE rooms SET name = $1, description = $2, type = $3, quantity = $4 WHERE hostel_id = $5 AND room_id = $6`;
+  const queryArgs = [updatedRoom.name, updatedRoom.description, updatedRoom.type, updatedRoom.quantity, updatedRoom.hostel_id, updatedRoom.room_id];
+  db.query(queryStr, queryArgs, (error, results) => {
+    if (error) {
+      callback('error', null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 
 /////////////////////////// CASANDRA QUERIES ///////////////////////////////////
 ///////NOT FUNCTIONING YET///////////
@@ -169,6 +184,7 @@ const getHostelById = (id, callback) => {
 
 
 module.exports = {
- getHostelById,
+ getRoomById,
+ updateRoomById,
 // getRoomsByHostel
 };

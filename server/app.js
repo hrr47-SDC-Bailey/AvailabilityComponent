@@ -15,7 +15,7 @@ app.use('/hostels/:hostelId', express.static('public'));
 app.get('/api/hostel/:hostelId', (req, res) => {
   const id = req.params.hostelId;
   if(!Number.isNaN(Number(id))) {
-    query.getHostelById(id)
+    query.getRoomById(id)
       .then((result) => {
         res.json(result);
       })
@@ -25,6 +25,17 @@ app.get('/api/hostel/:hostelId', (req, res) => {
   } else {
     res.send('Provide a numeric hostelId');
   }
+});
+
+
+app.put('/api/hostel/:hostelId', (req, res) => {
+  query.updateRoomById(req.body, (error, updatedRoom) => {
+    if (error) {
+      res.status(502).send();
+    } else {
+      res.send('ROOM UPDATED')
+    }
+  })
 });
 
 // app.get('/api/hostel/:hostelId/rooms', (req, res) => {
