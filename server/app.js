@@ -38,6 +38,16 @@ app.put('/api/hostel/:hostelId', (req, res) => {
   })
 });
 
+app.post('/api/hostel/:hostelId', (req, res) => {
+  query.createRoom(req.body, (error, newRoom) => {
+    if (error) {
+      res.status(502).send();
+    } else {
+      res.send('New Room Created');
+    }
+  })
+})
+
 // app.get('/api/hostel/:hostelId/rooms', (req, res) => {
 //   const id = req.params.hostelId;
 //   if (!Number.isNaN(Number(id))) {

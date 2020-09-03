@@ -37,6 +37,8 @@ const getRoomById = function getRoomByID(id) {
 const updateRoomById = (updatedRoom, callback) => {
   const queryStr =`UPDATE rooms SET name = $1, description = $2, type = $3, quantity = $4 WHERE hostel_id = $5 AND room_id = $6`;
   const queryArgs = [updatedRoom.name, updatedRoom.description, updatedRoom.type, updatedRoom.quantity, updatedRoom.hostel_id, updatedRoom.room_id];
+
+
   db.query(queryStr, queryArgs, (error, results) => {
     if (error) {
       callback('error', null);
@@ -44,6 +46,20 @@ const updateRoomById = (updatedRoom, callback) => {
       callback(null, results);
     }
   });
+}
+
+const createRoom = (newRoom, callback) => {
+  const queryStr = `INSERT INTO rooms (hostel_id, room_id, name, description, type, quantity) VALUES ($1, $2, $3, $4, $5, $6)`;
+  const queryArgs = [newRoom.hostel_id, newRoom.room_id, newRoom.name, newRoom.description, newRoom.type, newRoom.quantity];
+
+
+  db.query(queryStr, queryArgs, (error, results) => {
+    if (error) {
+      callback('error', null);
+    } else {
+      callback(null, results);
+    }
+  })
 }
 
 
@@ -186,5 +202,6 @@ const updateRoomById = (updatedRoom, callback) => {
 module.exports = {
  getRoomById,
  updateRoomById,
+ createRoom,
 // getRoomsByHostel
 };
