@@ -6,6 +6,7 @@ npm
 npm-debug.log
 node_modules/
 
+
 pids
 *.pid
 logs
@@ -28,3 +29,7 @@ server/database/config.js
 
 #Generated Data
 server/database/hostelsData.csv
+server/database/schema.js
+
+#Bundle
+public/bundle.js
