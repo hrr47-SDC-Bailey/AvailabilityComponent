@@ -1,33 +1,20 @@
-
-//////////////////// POSTGRESQL QUERIES /////////////////////////////////
-const { Client } = require('pg');
-
-const db = new Client({
-  user: 'tejones112',
-  host: 'localhost',
-  password: null,
-  database: 'hostels',
-});
+const db = require('./index.js');
 
 
-db.connect((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('CONNECTED');
-  }
-});
-
-
-const getRoomById = function getRoomByID(id) {
-  return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM rooms WHERE hostel_id = ${id}`, (error, results) => {
-      if (error) {
-        reject('error')
+const getRoomById = function getRoomByID(id, callback) {
+  db.pool.connect((err, client, done) => {
+    if (err) {
+      return console.error('error acquiring client', err.stack);
+    }
+    client.query(`SELECT * FROM rooms WHERE hostel_id = ${id}`, (error, results) => {
+      done()
+      if (error || results.length === 0) {
+        callback(error.stack, null);
+        console.log(error.stack);
       } else {
-        resolve(results);
+        callback(null, results.rows);
       }
-    });
+    })
   })
 }
 
@@ -38,7 +25,7 @@ const updateRoomById = (updatedRoom, callback) => {
   const queryArgs = [updatedRoom.name, updatedRoom.description, updatedRoom.type, updatedRoom.quantity, updatedRoom.hostel_id, updatedRoom.room_id];
 
 
-  db.query(queryStr, queryArgs, (error, results) => {
+  client.query(queryStr, queryArgs, (error, results) => {
     if (error) {
       callback('error', null);
     } else {
@@ -52,7 +39,7 @@ const createRoom = (newRoom, callback) => {
   const queryArgs = [newRoom.hostel_id, newRoom.room_id, newRoom.name, newRoom.description, newRoom.type, newRoom.quantity];
 
 
-  db.query(queryStr, queryArgs, (error, results) => {
+  client.query(queryStr, queryArgs, (error, results) => {
     if (error) {
       callback('error', null);
     } else {
@@ -65,7 +52,7 @@ const deleteRoom = (id, callback) => {
   const queryStr = `DELETE FROM rooms WHERE hostel_id = $1`;
   const queryArgs = [id];
 
-  db.query(queryStr, queryArgs, (error, results) => {
+  client.query(queryStr, queryArgs, (error, results) => {
     if (error) {
       callback('error', null);
     } else {
