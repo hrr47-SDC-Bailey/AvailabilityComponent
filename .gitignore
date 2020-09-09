@@ -33,4 +33,4 @@ server/database/schema.js
 
 #Bundle
 public/bundle.js
-public/bundle.js
+newrelic.js

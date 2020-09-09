@@ -23,6 +23,7 @@
     "grommet-styles": "^0.2.0",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
+    "newrelic": "^6.13.0",
     "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "artillery": "^1.6.1",
     "css-loader": "^4.2.1",
     "csv-writer": "^1.6.0",
     "eslint": "^7.6.0",
