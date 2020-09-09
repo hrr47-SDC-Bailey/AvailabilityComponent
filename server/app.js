@@ -22,7 +22,7 @@
 
 
 
-  app.get('/api/hostel/:hostelId/rooms', (req, res) => {
+  app.get('/api/hostels/:hostelId/rooms', (req, res) => {
     const id = req.params.hostelId;
     query.getRoomById(id, (error, rooms) => {
       if (error) {
@@ -34,7 +34,7 @@
   });
 
 
-  app.put('/api/hostel/:hostelId/rooms', (req, res) => {
+  app.put('/api/hostels/:hostelId/rooms', (req, res) => {
     query.updateRoomById(req.body, (error, updatedRoom) => {
       if (error) {
         res.status(502).send();
@@ -44,7 +44,7 @@
     })
   });
 
-  app.post('/api/hostel/:hostelId/rooms', (req, res) => {
+  app.post('/api/hostels/:hostelId/rooms', (req, res) => {
     query.createRoom(req.body, (error, newRoom) => {
       if (error) {
         res.status(502).send();
@@ -54,7 +54,7 @@
     })
   })
 
-  app.delete('/api/hostel/:hostelId/rooms', (req, res) => {
+  app.delete('/api/hostels/:hostelId/rooms', (req, res) => {
     query.deleteRoom(req.body.id, (error, deletedRoom) => {
       if (error) {
         res.status(502).send();
