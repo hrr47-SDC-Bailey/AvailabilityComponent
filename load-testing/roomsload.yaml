@@ -1,0 +1,20 @@
+config:
+  target: "http://localhost:3009"
+  phases:
+    - duration: 30
+      arrivalRate: 1
+      name: Warm up
+    - duration: 30
+      arrivalRate: 10
+      name: Ramp up load
+    - duration: 180
+      arrivalRate: 60
+      name: Sustained load
+scenarios:
+  - name: "Get Room"
+    flow:
+      - loop:
+        - get:
+            url: "/api/hostel/{{$randomNumber(9000000,10000000)}}"
+        count: 100
+
