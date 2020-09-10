@@ -46,6 +46,7 @@ class App extends React.Component {
         this.setState({
           rooms: result.data,
         });
+        console.log(result.data);
       });
   }
 
