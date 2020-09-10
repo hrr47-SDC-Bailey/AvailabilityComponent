@@ -23,7 +23,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.setHostelId();
-    this.getAvailability;
+    this.getAvailability();
   }
 
   componentDidUpdate(prevProps, prevState) {
