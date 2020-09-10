@@ -6,7 +6,7 @@ import Availability from './Availability.jsx';
 import Selected from './Selected.jsx';
 
 
-const url = '54.177.93.113';
+const url = 'ec2-54-177-93-113.us-west-1.compute.amazonaws.com';
 
 class App extends React.Component {
   constructor(props) {
