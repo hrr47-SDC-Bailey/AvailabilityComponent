@@ -3,7 +3,7 @@ import styles from './css/Availability.css';
 import Rooms from './Rooms.jsx';
 
 const Availability = (props) => {
-  if (props === undefined) {
+  if (props.rooms === undefined) {
     return null;
   }
   const privateRooms = props.rooms.filter((room) => room.type === 'private');
