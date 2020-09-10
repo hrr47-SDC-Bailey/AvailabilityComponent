@@ -21,7 +21,7 @@
 
 
   app.get('/loaderio-6bece3f8967b4aa4619149db451b6bff/', (req, res) => {
-    res.send('loaderio-6bece3f8967b4aa4619149db451b6bff)';
+    res.send('loaderio-6bece3f8967b4aa4619149db451b6bff');
   })
 
 
