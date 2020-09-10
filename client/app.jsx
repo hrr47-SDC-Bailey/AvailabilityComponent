@@ -47,7 +47,7 @@ class App extends React.Component {
           rooms: result.data,
         });
       });
-      console.log('HERE HERE HERE: ', this.rooms);
+      console.log('HERE HERE HERE: ', result.data);
   }
 
   handleChoose(e, room) {
