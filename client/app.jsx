@@ -17,7 +17,7 @@ class App extends React.Component {
       selectedRooms: [],
     };
     this.getAvailability = this.getAvailability.bind(this);
-    // this.setHostelId = this.setHostelId.bind(this);
+    this.setHostelId = this.setHostelId.bind(this);
   }
 
 
@@ -26,11 +26,11 @@ class App extends React.Component {
     this.setHostelId();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.hostelId !== this.state.hostelId) {
-  //     this.getAvailability();
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.hostelId !== this.state.hostelId) {
+      this.getAvailability();
+    }
+  }
 
   setHostelId() {
     const idPath = window.location.pathname;
@@ -38,10 +38,8 @@ class App extends React.Component {
     let newID = urlID[0];
     newID = Number.parseInt(newID, 10);
     this.setState({ hostelId: newID });
-    this.getAvailability();
   }
 
-// `/api/hostel/${this.state.hostelId}/rooms`
   getAvailability() {
     axios.get(`http://${url}:3009/api/hostels/${this.state.hostelId}/rooms`)
       .then((result) => {
