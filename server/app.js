@@ -14,6 +14,7 @@
     res.header("Access-Control-Allow-Origin", "*");
     next();
   });
+  // app.use(express.urlencoded());
   app.use(cors());
   app.use(express.static(path.join(__dirname, '../public')));
   app.use('/hostels/:hostelId', express.static(path.join(__dirname, '../public')));
