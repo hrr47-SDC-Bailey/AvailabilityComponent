@@ -6,7 +6,7 @@ import Availability from './Availability.jsx';
 import Selected from './Selected.jsx';
 
 
-const url = 'ec2-54-177-93-113.us-west-1.compute.amazonaws.com';
+const url = '54.177.93.113';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,13 +16,14 @@ class App extends React.Component {
       hostelId: -1,
       selectedRooms: [],
     };
+    this.getAvailability = this.getAvailability.bind(this);
   }
 
 
 
   componentDidMount() {
     this.setHostelId();
-    console.log(this.state.hostelId);
+    this.getAvailability;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,7 +42,7 @@ class App extends React.Component {
 
 // `/api/hostel/${this.state.hostelId}/rooms`
   getAvailability() {
-    axios.get('http://' + url + ':3009/api/hostels/${this.state.hostelId}/rooms')
+    axios.get(`http://${url}:3009/api/hostels/${this.state.hostelId}/rooms`)
       .then((result) => {
         this.setState({
           rooms: result.data,
