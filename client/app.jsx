@@ -17,14 +17,12 @@ class App extends React.Component {
       selectedRooms: [],
     };
     this.getAvailability = this.getAvailability.bind(this);
-    this.setHostelId = this.setHostelId.bind(this);
   }
 
 
 
   componentDidMount() {
     this.setHostelId();
-    this.getAvailability();
   }
 
   componentDidUpdate(prevProps, prevState) {
