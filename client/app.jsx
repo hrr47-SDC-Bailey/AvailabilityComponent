@@ -44,7 +44,7 @@ class App extends React.Component {
     axios.get('http://' + url + ':3009/api/hostels/${this.state.hostelId}/rooms')
       .then((result) => {
         this.setState({
-          rooms: result,
+          rooms: result.data,
         });
       });
       console.log('HERE HERE HERE: ', this.rooms);
