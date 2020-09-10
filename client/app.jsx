@@ -17,13 +17,13 @@ class App extends React.Component {
       selectedRooms: [],
     };
     this.getAvailability = this.getAvailability.bind(this);
+    this.setHostelId = this.setHostelId.bind(this);
   }
 
 
 
   componentDidMount() {
     this.setHostelId();
-    // this.getAvailability();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,6 +38,7 @@ class App extends React.Component {
     let newID = urlID[0];
     newID = Number.parseInt(newID, 10);
     this.setState({ hostelId: newID });
+    // this.getAvailability();
   }
 
 // `/api/hostel/${this.state.hostelId}/rooms`
